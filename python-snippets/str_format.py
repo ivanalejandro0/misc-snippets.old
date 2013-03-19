@@ -9,7 +9,7 @@ class Person(object):
         self.details = ''
 
     def _attributes(self):
-        return {'name': self.nombre,
+        return {'name': self.name,
                 'email': self.email,
                 'details': self.details}
 
