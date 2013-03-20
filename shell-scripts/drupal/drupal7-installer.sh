@@ -19,7 +19,7 @@ MYSQL_PASS=root
 SITE_TITLE="Site name here"
 SITE_NAME="site_name
 PROFILE="minimal"
-WEBMASTER_MAIL="webmaster@site_name.com"
+WEBMASTER_MAIL="webmaster@sitename.com"
 ADMIN_PASS="admin"
 
 DBNAME=\$SITE_NAME
@@ -37,8 +37,9 @@ recreate() {
     mysql -u root -e "drop database if exists $DBNAME; create database $DBNAME default character set utf8; grant all privileges on $DBNAME.* to $DBUSER@localhost identified by '$DBPASS'" --user=$MYSQL_ADMIN --password=$MYSQL_PASS &&
     drush dl drupal --drupal-project-rename=$SITE_NAME &&
     cd $SITE_NAME &&
-    drush -y si $PROFILE --db-url=mysql://$DBUSER:$DBPASS@localhost/$DBNAME --account-pass=$ADMIN_PASS --account-mail=$WEBMASTER_MAIL --site-name="$SITE_TITLE" --locale=es --clean-url &&
-    mkdir sites/all/modules/contrib &&
+    drush -y si $PROFILE --db-url=mysql://$DBUSER:$DBPASS@localhost/$DBNAME --account-name='admin' --account-pass=$ADMIN_PASS --account-mail=$WEBMASTER_MAIL --site-name="$SITE_TITLE" --locale=es --clean-url &&
+    drush vset admin_theme seven &&
+    mkdir sites/all/modules/{contrib,custom,features} &&
     chmod 777 sites/default/files -R && OK=1
 
     echo
@@ -69,7 +70,7 @@ delete(){
     OK=0
     rm $SITE_NAME -fr
     # mysql -u root -e "revoke all privileges from $DBUSER; drop user $DBUSER; drop database if exists $DBNAME" --user=$MYSQL_ADMIN --password=$MYSQL_PASS && OK=1
-    mysql -u root -e "drop user $DBUSER; drop database if exists $DBNAME" --user=$MYSQL_ADMIN --password=$MYSQL_PASS && OK=1
+    mysql -u root -e "drop user $DBUSER@localhost; drop database if exists $DBNAME" --user=$MYSQL_ADMIN --password=$MYSQL_PASS && OK=1
 
     if [[ OK==1 ]]; then
         echo "== Done =="
