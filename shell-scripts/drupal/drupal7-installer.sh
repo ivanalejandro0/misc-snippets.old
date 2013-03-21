@@ -17,7 +17,7 @@ MYSQL_ADMIN=root
 MYSQL_PASS=root
 
 SITE_TITLE="Site name here"
-SITE_NAME="site_name
+SITE_NAME="site_name"  # notice that mysql supports a maximum of 16 characters
 PROFILE="minimal"
 WEBMASTER_MAIL="webmaster@sitename.com"
 ADMIN_PASS="admin"
