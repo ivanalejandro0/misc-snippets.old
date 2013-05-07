@@ -15,3 +15,4 @@ alias aps="aptitude search"
 alias agi="sudo apt-get install"
 alias agr="sudo apt-get remove --auto-remove"
 
+alias tmux="tmux -2"
