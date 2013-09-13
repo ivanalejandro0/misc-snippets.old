@@ -17,21 +17,26 @@ class DemoWindow(QtGui.QMainWindow):
     def __init__(self):
         QtGui.QMainWindow.__init__(self)
 
-        uifile = os.path.join(
-            os.path.abspath(os.path.dirname(__file__)), 'window.ui')
-
+        file_path = os.path.abspath(os.path.dirname(__file__))
+        uifile = os.path.join(file_path, 'window.ui')
         uic.loadUi(uifile, self)
 
         self.ui = self
 
-    # test widget/signal
-    def on_widget_signal(self):
-        ''' Automatic connection via uic :) '''
+    def on_widget_name_signal_name(self):
+        '''
+        SLOT
+        Triggered on:
+            widget_name.signal_name
+            for instance: test_button.clicked
+
+        Automatic connection made by uic.
+        '''
         pass
 
     # test action
     @QtCore.pyqtSlot()
-    def on_actionAlgo_triggered(self):
+    def on_actionSomething_triggered(self):
         pass
 
 
