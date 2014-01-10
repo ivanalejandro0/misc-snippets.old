@@ -18,3 +18,8 @@ def showMessage():
     msgBox.setIcon(QtGui.QMessageBox.Warning)
     msgBox.exec_()
     return
+
+
+if __name__ == '__main__':
+    app = QtGui.QApplication(sys.argv)
+    showMessage()
