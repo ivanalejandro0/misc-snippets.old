@@ -36,13 +36,13 @@ DST=$2
 [[ -z $SRC || -z $DST ]] && help && exit
 
 echo -n "Calculating size of '$SRC' -> "
-SRC_sizeH=`du -sh $SRC | cut -f1 | tr , .`  # human friendly, e.g.: 34G
-SRC_size=`du -s $SRC | cut -f1`  # math friendly, e.g.: 34889264
+SRC_sizeH=`du -sh $SRC 2> /dev/null | cut -f1 | tr , .`  # human friendly, e.g.: 34G
+SRC_size=`du -s $SRC 2> /dev/null | cut -f1`  # math friendly, e.g.: 34889264
 echo $SRC_sizeH
 
 while true; do
-    DST_sizeH=`du -sh $DST | cut -f1 | tr , .`
-    DST_size=`du -s $DST | cut -f1`
+    DST_sizeH=`du -sh $DST 2> /dev/null | cut -f1 | tr , .`
+    DST_size=`du -s $DST 2> /dev/null | cut -f1`
     percent=$(( $DST_size * 100 / $SRC_size ))
 
     progress $SRC_sizeH $DST_sizeH $percent
